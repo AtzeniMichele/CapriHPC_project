@@ -13,6 +13,7 @@ import psutil
 from sklearn.preprocessing import MinMaxScaler
 import multiprocessing
 
+
 # 2. functions for the NN parallel training using multiprocessing library
 def init_worker():
     signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -40,10 +41,37 @@ def train_model(NNlib):
         return {'Library Ref': NNlib, 'test R^2': R_2, 'test MAE': MAE, 'test MSE': MSE}
 
     elif NNlib == 'tensorflow':
-        return 'None'
+        import tensorflow as tf
+        from tensorflow import keras
+
+        learning_rate = 0.001
+        epochs = 100
+        batch_size = 10
+        model = keras.Sequential([
+            keras.layers.Dense(50, activation='relu'),
+            keras.layers.Dense(50, activation='relu'),
+            keras.layers.Dense(1)
+            ])
+
+        model.compile(
+            optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate), loss="mean_squared_error",
+            metrics=tf.keras.metrics.MeanAbsoluteError()
+        )
+
+        model.fit(train_features, train_outcome, batch_size=batch_size, epochs=epochs)
+        predict_test = model.predict(test_features)
+        predict_test = np.array(predict_test)
+        RSS = ((test_outcome - predict_test) ** 2).sum()
+        TSS = ((test_outcome - test_outcome.mean()) ** 2).sum()
+        R_2 = 1 - (RSS / TSS)
+
+        MAE = (abs(predict_test - test_outcome).sum()) / len(predict_test)
+        MSE = (((predict_test - test_outcome) ** 2).sum()) / len(predict_test)
+
+        return {'Library Ref': NNlib, 'test R^2': R_2, 'test MAE': MAE, 'test MSE': MSE}
+
     elif NNlib == 'neurolab':
         return 'None'
-
 
 
 # 3. Loading, pre-processing and data partition
@@ -80,8 +108,8 @@ test_features = scaler.transform(test_features)
 start = timer()
 num_workers = 3
 NNlib = ['sklearn', 'tensorflow', 'neurolab']
-multiprocessing.set_start_method('forkserver', force= True)
-pool = multiprocessing.Pool(num_workers,init_worker)
+multiprocessing.set_start_method('forkserver', force=True)
+pool = multiprocessing.Pool(num_workers, init_worker)
 scores = pool.map(train_model, NNlib)
 end = timer()
 
