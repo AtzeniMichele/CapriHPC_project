@@ -119,8 +119,3 @@ end = timer()
 print(scores)
 print('Elapsed time:', end - start, '[s]')
 
-ans = np.empty(len(predict_test),dtype=float)
-for i in range(len(predict_test)):
-    ind = predict_test[i]
-    for j in ind:
-        ans[i] = j
