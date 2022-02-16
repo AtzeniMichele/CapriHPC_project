@@ -1,5 +1,5 @@
 """
-This script will contain the main pipeline regarding the training and test of three different neural network;
+This script will contain the main pipeline regarding the training and test of two different neural network;
 respectively based on: scikit (sklearn.neural_network),tensorflow (keras) and neurolab.
 """
 
@@ -70,9 +70,6 @@ def train_model(NNlib):
 
         return {'Library Ref': NNlib, 'test R^2': R_2, 'test MAE': MAE, 'test MSE': MSE}
 
-    elif NNlib == 'neurolab':
-        return 'None'
-
 
 # 3. Loading, pre-processing and data partition
 ds = pd.read_csv('210526WeAdatasetRegression.csv')
@@ -107,7 +104,7 @@ test_features = scaler.transform(test_features)
 # 4. Run the model
 start = timer()
 num_workers = 3
-NNlib = ['sklearn', 'tensorflow', 'neurolab']
+NNlib = ['sklearn', 'tensorflow']
 multiprocessing.set_start_method('forkserver', force=True)
 pool = multiprocessing.Pool(num_workers, init_worker)
 scores = pool.map(train_model, NNlib)
