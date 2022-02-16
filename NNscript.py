@@ -9,7 +9,6 @@ from timeit import default_timer as timer
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-import psutil
 from sklearn.preprocessing import MinMaxScaler
 import multiprocessing
 
@@ -105,7 +104,7 @@ test_features = scaler.transform(test_features)
 start = timer()
 num_workers = 3
 NNlib = ['sklearn', 'tensorflow']
-multiprocessing.set_start_method('forkserver', force=True)
+multiprocessing.set_start_method('fork', force=True)
 pool = multiprocessing.Pool(num_workers, init_worker)
 scores = pool.map(train_model, NNlib)
 end = timer()
