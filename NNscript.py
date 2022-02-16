@@ -59,7 +59,14 @@ def train_model(NNlib):
 
         model.fit(train_features, train_outcome, batch_size=batch_size, epochs=epochs)
         predict_test = model.predict(test_features)
-        predict_test = np.array(predict_test)
+        # a rough method to extract prediction values ( list of lists) in order to compute linear mathematical operations
+        ans = np.empty(len(predict_test),dtype=float)
+        for i in range(len(predict_test)):
+            ind = predict_test[i]
+            for j in ind:
+                ans[i] = j
+        predict_test = ans
+
         RSS = ((test_outcome - predict_test) ** 2).sum()
         TSS = ((test_outcome - test_outcome.mean()) ** 2).sum()
         R_2 = 1 - (RSS / TSS)
@@ -111,3 +118,9 @@ end = timer()
 
 print(scores)
 print('Elapsed time:', end - start, '[s]')
+
+ans = np.empty(len(predict_test),dtype=float)
+for i in range(len(predict_test)):
+    ind = predict_test[i]
+    for j in ind:
+        ans[i] = j
