@@ -1,6 +1,6 @@
 """
 This script will contain the main pipeline regarding the training and test of two different neural network;
-respectively based on: scikit (sklearn.neural_network),tensorflow (keras) and neurolab.
+respectively based on: scikit (sklearn.neural_network),tensorflow (keras).
 """
 
 # 1. Importing libraries
