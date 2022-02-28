@@ -77,8 +77,8 @@ def train_model(seed):
 
 
 # 3. Loading, pre-processing and data partition
-# ds = pd.read_csv('/capri_project/210526WeAdatasetRegression.csv')
-ds = pd.read_csv('210526WeAdatasetRegression.csv')
+ds = pd.read_csv('/capri_project/210526WeAdatasetRegression.csv')
+#ds = pd.read_csv('210526WeAdatasetRegression.csv')
 
 ds.drop(['UserNo.', 'UserID', 'SmokingHabit'], axis=1,
         inplace=True)  # first two columns are subject identifier, i.e are not useful to predict asthma exacerbations
