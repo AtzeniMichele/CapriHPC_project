@@ -13,4 +13,4 @@
 
 cd $SLURM_SUBMIT_DIR
 
-srun singularity exec capri_project_container.sif python3 /capri_project/NNscript2.py
+srun singularity exec capri_project_container.sif python3 /capri_project/NNscript.py
