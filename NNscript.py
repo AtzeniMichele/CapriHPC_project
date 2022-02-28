@@ -109,7 +109,7 @@ test_features = scaler.transform(test_features)
 
 # 4. Run the model
 start = timer()
-num_workers = 3
+num_workers = 2
 NNlib = ['sklearn', 'tensorflow']
 multiprocessing.set_start_method('fork', force=True)
 pool = multiprocessing.Pool(num_workers, init_worker)
