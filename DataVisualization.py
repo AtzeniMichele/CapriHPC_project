@@ -20,3 +20,14 @@ plt.xlabel('Number of CPUs')
 plt.ylabel('MAE mean (sd)')
 plt.show()
 
+#wallclock time
+plt.plot([1,2,4,8], [115, 102, 54, 36],'ro-')
+plt.xlabel('Number of CPUs')
+plt.ylabel('Wall-Clock time [s]')
+plt.show()
+
+#RAM Usage
+plt.plot([1,2,4,8], [0.56, 0.93, 1.62, 3.15],'bo-')
+plt.xlabel('Number of CPUs')
+plt.ylabel('RAM Usage [GB]')
+plt.show()
