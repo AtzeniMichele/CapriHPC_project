@@ -38,7 +38,7 @@ def train_model(seed):
     test_outcome = target_scaler.transform(test_outcome)
 
     learning_rate = 0.001
-    epochs = 100
+    epochs = 1000
     batch_size = 10
     model = keras.Sequential([
         keras.layers.Dense(units=50, input_dim=18, activation='relu'),
@@ -77,8 +77,8 @@ def train_model(seed):
 
 
 # 3. Loading, pre-processing and data partition
-ds = pd.read_csv('/capri_project/210526WeAdatasetRegression.csv')
-#ds = pd.read_csv('210526WeAdatasetRegression.csv')
+#ds = pd.read_csv('/capri_project/210526WeAdatasetRegression.csv')
+ds = pd.read_csv('210526WeAdatasetRegression.csv')
 
 ds.drop(['UserNo.', 'UserID', 'SmokingHabit'], axis=1,
         inplace=True)  # first two columns are subject identifier, i.e are not useful to predict asthma exacerbations

@@ -13,5 +13,5 @@ From: ubuntu:21.10
   pip3 install pandas numpy sklearn tensorflow
   
 %files 
-  /home/michele/PycharmProjects/CapriHPC_project_22/NNscript.py /capri_project/NNscript.py
+  /home/michele/PycharmProjects/CapriHPC_project_22/NNscript2.py /capri_project/NNscript.py
   /home/michele/PycharmProjects/CapriHPC_project_22/210526WeAdatasetRegression.csv  /capri_project/210526WeAdatasetRegression.csv
